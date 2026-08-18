@@ -143,7 +143,7 @@ export default function Home() {
           <small className="formNote">{fi ? "Viestisi lähetetään osoitteeseen ehsanmohajer.fi@gmail.com." : "Your message will be sent to ehsanmohajer.fi@gmail.com."}</small>
         </form>
       </section>
-      <footer><a className="brand" href="#top">OLENA <span>KAKUT</span></a><p>{t.footer} · {new Date().getFullYear()}</p><p className="copyright">© {new Date().getFullYear()} Sani · AI &amp; Software Developer</p><button onClick={() => setLang(fi ? "en" : "fi")}>{fi ? "English" : "Suomeksi"}</button></footer>
+      <footer><a className="brand" href="#top">OLENA <span>KAKUT</span></a><div className="footerCredit"><p>{t.footer} · {new Date().getFullYear()}</p><a className="copyright" href="https://ehsanmohajer.fi" target="_blank" rel="noreferrer">© {new Date().getFullYear()} Sani · AI &amp; Software Developer</a></div><button onClick={() => setLang(fi ? "en" : "fi")}>{fi ? "English" : "Suomeksi"}</button></footer>
 
       <button className={`toTop ${showTop ? "visible" : ""}`} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label={fi ? "Takaisin ylös" : "Back to top"}>↑<span>{fi ? "Ylös" : "Top"}</span></button>
 
