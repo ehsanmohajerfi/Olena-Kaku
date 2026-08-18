@@ -1,12 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 
 const gallery = Array.from({ length: 23 }, (_, i) => `/cakes/cake-${String(i + 1).padStart(2, "0")}.jpeg`);
 
 export default function Home() {
   const [lang, setLang] = useState<"fi" | "en">("fi");
+  const [showTop, setShowTop] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatInput, setChatInput] = useState("");
+  const [messages, setMessages] = useState<{ from: "bot" | "user"; text: string }[]>([]);
   const fi = lang === "fi";
+
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 700);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const greeting = fi
+    ? "Hei! Olen Olenan kakkuapuri. Kysy sijainnista, hinnoista, mauista tai tilaamisesta."
+    : "Hi! I’m Olena’s cake assistant. Ask me about location, prices, flavours or ordering.";
+
+  const getAnswer = (question: string) => {
+    const q = question.toLocaleLowerCase(fi ? "fi" : "en");
+    if (/missä|sijaint|jyväskyl|where|location|based/.test(q)) return fi
+      ? "Olena leipoo tällä hetkellä Jyväskylässä, Suomessa."
+      : "Olena currently bakes in Jyväskylä, Finland.";
+    if (/hint|maks|edull|price|cost|reasonable|cheap/.test(q)) return fi
+      ? "Hinnat ovat erittäin kohtuulliset. Jokainen kakku hinnoitellaan koon, täytteiden ja koristelun mukaan, joten tarkka hinta annetaan toiveidesi perusteella."
+      : "Prices are very reasonable. Each cake is priced according to its size, fillings and decoration, so you’ll receive an exact quote based on your wishes.";
+    if (/maku|täyte|pohj|flavour|flavor|filling|base/.test(q)) return fi
+      ? "Vaihtoehtoina ovat esimerkiksi vaalea tai suklainen sokerikakkupohja, hunajakakku, lehtitaikina ja marenki sekä monet marja-, hedelmä- ja voidetäytteet."
+      : "Options include vanilla or chocolate sponge, honey cake, puff pastry and meringue, plus many berry, fruit and cream fillings.";
+    if (/allerg|gluteen|laktoos|diet|vegan/.test(q)) return fi
+      ? "Erityistoiveista voidaan keskustella. Kerro kaikki allergiat ja erityisruokavaliot aina tilausta tehdessä."
+      : "Special requests can be discussed. Always mention every allergy and dietary requirement when ordering.";
+    if (/hygienia|passi|hygiene/.test(q)) return fi
+      ? "Kyllä. Olenalla on voimassa oleva hygieniapassi."
+      : "Yes. Olena has a valid Finnish Hygiene Passport.";
+    if (/tilaa|yhteys|contact|order|book/.test(q)) return fi
+      ? "Kerro Olenalle juhlapäivä, henkilömäärä, toivottu maku ja tyyli sekä mahdolliset allergiat. Hän tekee ehdotuksen juhlaasi varten."
+      : "Tell Olena the celebration date, number of guests, preferred flavour and style, and any allergies. She’ll prepare a suggestion for your event.";
+    return fi
+      ? "Voin auttaa sijainnin, hintojen, makujen, allergioiden ja tilaamisen kanssa. Kokeile yhtä alla olevista kysymyksistä."
+      : "I can help with location, prices, flavours, allergies and ordering. Try one of the questions below.";
+  };
+
+  const askQuestion = (question: string) => {
+    const clean = question.trim();
+    if (!clean) return;
+    setMessages((current) => [...current, { from: "user", text: clean }, { from: "bot", text: getAnswer(clean) }]);
+    setChatInput("");
+  };
+
+  const submitQuestion = (event: FormEvent) => {
+    event.preventDefault();
+    askQuestion(chatInput);
+  };
   const t = {
     nav: fi ? ["Kakut", "Maut", "Minusta"] : ["Cakes", "Flavours", "About"],
     ask: fi ? "Kysy kakusta" : "Ask about a cake",
@@ -81,6 +133,23 @@ export default function Home() {
         <p className="eyebrow">{t.orderKicker}</p><h2>{t.orderTitle}</h2><p>{t.orderText}</p><div className="contactPlaceholder"><strong>{t.message}</strong><small>{t.contactNote}</small></div>
       </section>
       <footer><a className="brand" href="#top">OLENA <span>KAKUT</span></a><p>{t.footer} · {new Date().getFullYear()}</p><button onClick={() => setLang(fi ? "en" : "fi")}>{fi ? "English" : "Suomeksi"}</button></footer>
+
+      <button className={`toTop ${showTop ? "visible" : ""}`} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label={fi ? "Takaisin ylös" : "Back to top"}>↑<span>{fi ? "Ylös" : "Top"}</span></button>
+
+      <div className="chatWidget">
+        {chatOpen && <section className="chatPanel" role="dialog" aria-label={fi ? "Kakkuapuri" : "Cake assistant"}>
+          <div className="chatHead"><div><small>OLENA KAKUT</small><strong>{fi ? "Kakkuapuri" : "Cake assistant"}</strong></div><button onClick={() => setChatOpen(false)} aria-label={fi ? "Sulje keskustelu" : "Close chat"}>×</button></div>
+          <div className="chatBody" aria-live="polite">
+            <p className="botMessage">{greeting}</p>
+            {messages.map((message, index) => <p key={`${message.from}-${index}`} className={message.from === "bot" ? "botMessage" : "userMessage"}>{message.text}</p>)}
+          </div>
+          <div className="quickQuestions">
+            {(fi ? ["Missä Olena leipoo?", "Mitä kakut maksavat?", "Mitä makuja on?"] : ["Where does Olena bake?", "What do cakes cost?", "Which flavours are available?"]).map((question) => <button key={question} onClick={() => askQuestion(question)}>{question}</button>)}
+          </div>
+          <form className="chatForm" onSubmit={submitQuestion}><input value={chatInput} onChange={(event) => setChatInput(event.target.value)} placeholder={fi ? "Kirjoita kysymys…" : "Type a question…"} aria-label={fi ? "Kysymys" : "Question"}/><button type="submit" aria-label={fi ? "Lähetä" : "Send"}>→</button></form>
+        </section>}
+        <button className="chatToggle" onClick={() => setChatOpen((open) => !open)} aria-expanded={chatOpen} aria-label={fi ? "Avaa kakkuapuri" : "Open cake assistant"}><span>{chatOpen ? "×" : "?"}</span>{!chatOpen && (fi ? "Kysy" : "Ask")}</button>
+      </div>
     </main>
   );
 }
