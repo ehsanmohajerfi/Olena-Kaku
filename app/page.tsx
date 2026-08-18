@@ -41,8 +41,8 @@ export default function Home() {
       ? "Kyllä. Olenalla on voimassa oleva hygieniapassi."
       : "Yes. Olena has a valid Finnish Hygiene Passport.";
     if (/tilaa|yhteys|contact|order|book/.test(q)) return fi
-      ? "Kerro Olenalle juhlapäivä, henkilömäärä, toivottu maku ja tyyli sekä mahdolliset allergiat. Hän tekee ehdotuksen juhlaasi varten."
-      : "Tell Olena the celebration date, number of guests, preferred flavour and style, and any allergies. She’ll prepare a suggestion for your event.";
+      ? "Voit tilata WhatsAppilla numerosta 040 818 9294 tai lähettää viestin sivun lomakkeella. Kerro juhlapäivä, henkilömäärä, maku, tyyli ja mahdolliset allergiat."
+      : "You can order on WhatsApp at 040 818 9294 or use the message form at the end of the page. Include the date, number of guests, flavour, style and any allergies.";
     return fi
       ? "Voin auttaa sijainnin, hintojen, makujen, allergioiden ja tilaamisen kanssa. Kokeile yhtä alla olevista kysymyksistä."
       : "I can help with location, prices, flavours, allergies and ordering. Try one of the questions below.";
@@ -91,7 +91,7 @@ export default function Home() {
     orderTitle: fi ? "Millainen kakku sinulla on mielessä?" : "What kind of cake do you have in mind?",
     orderText: fi ? "Kun otat yhteyttä, kerro juhlapäivä, henkilömäärä, toivottu maku ja tyyli sekä mahdolliset allergiat. Saat ehdotuksen juuri sinun juhlaasi varten." : "When you get in touch, share the date, number of guests, preferred flavour and style, plus any allergies. You’ll receive a suggestion created for your celebration.",
     message: fi ? "Ota yhteyttä Olenaan" : "Contact Olena",
-    contactNote: fi ? "Yhteystieto voidaan lisätä tähän ennen julkista avausta." : "Contact details can be added here before the public launch.",
+    contactNote: fi ? "Nopein tapa kysyä kakusta ja vapaista päivistä." : "The quickest way to ask about a cake and available dates.",
     footer: fi ? "Käsintehty rakkaudella" : "Handmade with love",
   };
 
@@ -130,9 +130,20 @@ export default function Home() {
       </section>
 
       <section className="contact" id="contact">
-        <p className="eyebrow">{t.orderKicker}</p><h2>{t.orderTitle}</h2><p>{t.orderText}</p><div className="contactPlaceholder"><strong>{t.message}</strong><small>{t.contactNote}</small></div>
+        <div className="contactIntro"><p className="eyebrow">{t.orderKicker}</p><h2>{t.orderTitle}</h2><p>{t.orderText}</p><a className="whatsapp" href="https://wa.me/358408189294" target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>040 818 9294</strong><small>{t.contactNote}</small></a></div>
+        <form className="contactForm" action="https://formsubmit.co/ehsanmohajer.fi@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Uusi viesti – Olena Kakut"/>
+          <input type="hidden" name="_next" value="https://olena-kaku.vercel.app/?sent=1#contact"/>
+          <input type="text" name="_honey" className="honeypot" tabIndex={-1} autoComplete="off"/>
+          <div className="field"><label htmlFor="name">{fi ? "Nimi" : "Name"}</label><input id="name" name="name" required autoComplete="name"/></div>
+          <div className="field"><label htmlFor="email">{fi ? "Sähköposti" : "Email"}</label><input id="email" name="email" type="email" required autoComplete="email"/></div>
+          <div className="formRow"><div className="field"><label htmlFor="phone">{fi ? "Puhelin" : "Phone"}</label><input id="phone" name="phone" type="tel" autoComplete="tel"/></div><div className="field"><label htmlFor="date">{fi ? "Juhlapäivä" : "Celebration date"}</label><input id="date" name="date" type="date"/></div></div>
+          <div className="field"><label htmlFor="message">{fi ? "Kerro kakusta ja henkilömäärästä" : "Tell us about the cake and number of guests"}</label><textarea id="message" name="message" rows={5} required></textarea></div>
+          <button type="submit">{fi ? "Lähetä viesti" : "Send message"}<span>→</span></button>
+          <small className="formNote">{fi ? "Viestisi lähetetään osoitteeseen ehsanmohajer.fi@gmail.com." : "Your message will be sent to ehsanmohajer.fi@gmail.com."}</small>
+        </form>
       </section>
-      <footer><a className="brand" href="#top">OLENA <span>KAKUT</span></a><p>{t.footer} · {new Date().getFullYear()}</p><button onClick={() => setLang(fi ? "en" : "fi")}>{fi ? "English" : "Suomeksi"}</button></footer>
+      <footer><a className="brand" href="#top">OLENA <span>KAKUT</span></a><p>{t.footer} · {new Date().getFullYear()}</p><p className="copyright">© {new Date().getFullYear()} Sani · AI &amp; Software Developer</p><button onClick={() => setLang(fi ? "en" : "fi")}>{fi ? "English" : "Suomeksi"}</button></footer>
 
       <button className={`toTop ${showTop ? "visible" : ""}`} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label={fi ? "Takaisin ylös" : "Back to top"}>↑<span>{fi ? "Ylös" : "Top"}</span></button>
 
