@@ -29,8 +29,8 @@ export default function Home() {
       ? "Olena leipoo tällä hetkellä Jyväskylässä, Suomessa."
       : "Olena currently bakes in Jyväskylä, Finland.";
     if (/hint|maks|edull|price|cost|reasonable|cheap/.test(q)) return fi
-      ? "Hinnat ovat erittäin kohtuulliset. Jokainen kakku hinnoitellaan koon, täytteiden ja koristelun mukaan, joten tarkka hinta annetaan toiveidesi perusteella."
-      : "Prices are very reasonable. Each cake is priced according to its size, fillings and decoration, so you’ll receive an exact quote based on your wishes.";
+      ? "Olena ei julkaise hintoja eikä ota tilauksia ennen kuin elintarvike- ja veroasiat on selvitetty. Myöhemmin hinta määräytyy koon, täytteiden ja koristelun mukaan."
+      : "Olena is not publishing prices or accepting orders until the food-safety and tax requirements are confirmed. Later, prices will depend on size, fillings and decoration.";
     if (/maku|täyte|pohj|flavour|flavor|filling|base/.test(q)) return fi
       ? "Vaihtoehtoina ovat esimerkiksi vaalea tai suklainen sokerikakkupohja, hunajakakku, lehtitaikina ja marenki sekä monet marja-, hedelmä- ja voidetäytteet."
       : "Options include vanilla or chocolate sponge, honey cake, puff pastry and meringue, plus many berry, fruit and cream fillings.";
@@ -40,9 +40,12 @@ export default function Home() {
     if (/hygienia|passi|hygiene/.test(q)) return fi
       ? "Kyllä. Olenalla on voimassa oleva hygieniapassi."
       : "Yes. Olena has a valid Finnish Hygiene Passport.";
+    if (/laki|säänn|vero|alv|rule|legal|tax|vat/.test(q)) return fi
+      ? "Olena selvittää vaatimukset Jyväskylän elintarvikevalvonnan ja Verohallinnon kanssa ennen myynnin aloittamista. Sivun Toiminnan tila -osiossa on viranomaislähteisiin perustuva tarkistuslista."
+      : "Olena is confirming the requirements with Jyväskylä food control and the Finnish Tax Administration before sales begin. See the Business status section for a checklist based on official sources.";
     if (/tilaa|yhteys|contact|order|book/.test(q)) return fi
-      ? "Voit tilata WhatsAppilla numerosta 040 818 9294 tai lähettää viestin sivun lomakkeella. Kerro juhlapäivä, henkilömäärä, maku, tyyli ja mahdolliset allergiat."
-      : "You can order on WhatsApp at 040 818 9294 or use the message form at the end of the page. Include the date, number of guests, flavour, style and any allergies.";
+      ? "Tilaukset eivät ole vielä avoinna. Olena selvittää ensin Jyväskylän elintarvikevalvonnan, omavalvonnan ja verotuksen vaatimukset. Voit lähettää vain yleisen kysymyksen sivun lopussa."
+      : "Orders are not open yet. Olena is first confirming Jyväskylä food-control, self-monitoring and tax requirements. You may send a general question at the end of the page.";
     return fi
       ? "Voin auttaa sijainnin, hintojen, makujen, allergioiden ja tilaamisen kanssa. Kokeile yhtä alla olevista kysymyksistä."
       : "I can help with location, prices, flavours, allergies and ordering. Try one of the questions below.";
@@ -60,8 +63,8 @@ export default function Home() {
     askQuestion(chatInput);
   };
   const t = {
-    nav: fi ? ["Kakut", "Maut", "Minusta"] : ["Cakes", "Flavours", "About"],
-    ask: fi ? "Kysy kakusta" : "Ask about a cake",
+    nav: fi ? ["Kakut", "Maut", "Minusta", "Toiminnan tila"] : ["Cakes", "Flavours", "About", "Business status"],
+    ask: fi ? "Toiminnan tila" : "Business status",
     eyebrow: fi ? "KÄSIN TEHTY • SINULLE" : "HANDMADE • FOR YOU",
     title: fi ? <>Kakku, joka<br/><em>tuntuu omalta.</em></> : <>A cake that<br/><em>feels like yours.</em></>,
     lead: fi ? "Olena valmistaa uniikit täytekakut juhliin, merkkipäiviin ja elämän makeimpiin hetkiin." : "Olena creates unique celebration cakes for birthdays, milestones and life’s sweetest moments.",
@@ -87,11 +90,11 @@ export default function Home() {
     aboutTitle: fi ? <>Hei, olen <i>Olena.</i></> : <>Hi, I’m <i>Olena.</i></>,
     aboutText: fi ? "Rakastan yhdistää tuttuja, rakastettuja makuja asiakkaan omaan ideaan. Kakku voi olla klassinen ja hillitty tai värikäs ja leikkisä – tärkeintä on, että se maistuu ja tuntuu juuri teidän juhlaltanne." : "I love combining familiar, beloved flavours with each customer’s own idea. A cake can be classic and understated or colourful and playful – what matters is that it tastes and feels just right for your celebration.",
     hygiene: fi ? "Voimassa oleva hygieniapassi" : "Valid Finnish Hygiene Passport",
-    orderKicker: fi ? "SUUNNITELLAAN YHDESSÄ" : "LET’S PLAN IT TOGETHER",
-    orderTitle: fi ? "Millainen kakku sinulla on mielessä?" : "What kind of cake do you have in mind?",
-    orderText: fi ? "Kun otat yhteyttä, kerro juhlapäivä, henkilömäärä, toivottu maku ja tyyli sekä mahdolliset allergiat. Saat ehdotuksen juuri sinun juhlaasi varten." : "When you get in touch, share the date, number of guests, preferred flavour and style, plus any allergies. You’ll receive a suggestion created for your celebration.",
-    message: fi ? "Ota yhteyttä Olenaan" : "Contact Olena",
-    contactNote: fi ? "Nopein tapa kysyä kakusta ja vapaista päivistä." : "The quickest way to ask about a cake and available dates.",
+    orderKicker: fi ? "YLEISET KYSYMYKSET" : "GENERAL QUESTIONS",
+    orderTitle: fi ? "Haluatko jättää viestin?" : "Would you like to leave a message?",
+    orderText: fi ? "Tilaukset eivät ole vielä avoinna. Lomakkeella voi lähettää yleisen kysymyksen tai yhteydenottopyynnön tulevaisuutta varten." : "Orders are not open yet. You may use the form for a general question or a future contact request.",
+    message: fi ? "Yleinen yhteydenotto" : "General enquiry",
+    contactNote: fi ? "Ei vielä kakkujen tilauksia." : "Cake orders are not yet available.",
     footer: fi ? "Käsintehty rakkaudella" : "Handmade with love",
   };
 
@@ -100,11 +103,11 @@ export default function Home() {
       <header className="nav">
         <a className="brand" href="#top">OLENA <span>KAKUT</span></a>
         <nav aria-label={fi ? "Päävalikko" : "Main navigation"}>
-          <a href="#cakes">{t.nav[0]}</a><a href="#flavours">{t.nav[1]}</a><a href="#about">{t.nav[2]}</a>
+          <a href="#cakes">{t.nav[0]}</a><a href="#flavours">{t.nav[1]}</a><a href="#about">{t.nav[2]}</a><a href="#readiness">{t.nav[3]}</a>
         </nav>
         <div className="navActions">
           <button className="lang" onClick={() => setLang(fi ? "en" : "fi")} aria-label={fi ? "Switch to English" : "Vaihda suomeksi"}>{fi ? "EN" : "FI"}</button>
-          <a className="order" href="#contact">{t.ask}</a>
+          <a className="order" href="#readiness">{t.ask}</a>
         </div>
       </header>
 
@@ -129,16 +132,35 @@ export default function Home() {
         <div className="aboutCopy"><p className="eyebrow">{t.aboutKicker}</p><h2>{t.aboutTitle}</h2><p>{t.aboutText}</p><div className="hygiene"><b>✓</b><span>{t.hygiene}</span></div></div>
       </section>
 
+      <section className="readiness" id="readiness">
+        <div className="readinessIntro"><p className="eyebrow">{fi ? "VASTUULLINEN ALOITUS" : "A RESPONSIBLE START"}</p><h2>{fi ? "Portfolio nyt. Myynti myöhemmin." : "Portfolio now. Sales later."}</h2><p>{fi ? "Olena ei ota tällä hetkellä vastaan kakkujen tilauksia. Ennen kaupallisen toiminnan aloittamista hän selvittää vaatimukset Jyväskylän elintarvikevalvonnan ja Verohallinnon kanssa." : "Olena is not currently accepting cake orders. Before commercial activity begins, she will confirm the requirements with Jyväskylä food control and the Finnish Tax Administration."}</p><div className="statusBadge"><span></span>{fi ? "Tilaukset tauolla" : "Orders paused"}</div></div>
+        <div className="rulesGrid">
+          {(fi ? [
+            ["1", "Elintarvikevalvonta", "Säännöllisestä elintarviketoiminnasta tehdään yleensä ilmoitus sijaintikunnan valvontaan viimeistään neljä viikkoa ennen aloitusta. Paikallinen viranomainen arvioi kotikeittiön ja suunnitellut tuotteet tapauskohtaisesti."],
+            ["2", "Omavalvonta ja kylmäketju", "Toiminnassa on hallittava hygienia, raaka-aineet, säilytys, kylmäketju, kuljetus, jäljitettävyys ja poikkeamat. Hygieniapassi on voimassa, mutta se ei yksin korvaa muita velvoitteita."],
+            ["3", "Ainesosat ja allergeenit", "Asiakkaalle on annettava oikeat tiedot tuotteesta, erityisesti allergioita ja intoleransseja aiheuttavista aineista. Erityisruokavaliot arvioidaan aina erikseen."],
+            ["4", "Tulot ja verotus", "Kaikki myyntitulot voivat olla veronalaista tuloa. Tuloista, menoista ja tositteista pidetään kirjaa. ALV-velvollisuuden raja on 20 000 € kalenterivuodessa; elintarvikkeiden verokanta on 13,5 % vuonna 2026, jos toiminta on ALV-velvollista."],
+          ] : [
+            ["1", "Food-control registration", "Regular food activity generally requires notification to the local authority at least four weeks before starting. The local authority assesses the home kitchen and planned products case by case."],
+            ["2", "Self-monitoring and cold chain", "The operation must manage hygiene, ingredients, storage, cold chain, transport, traceability and problems. A valid Hygiene Passport helps, but does not replace the other duties."],
+            ["3", "Ingredients and allergens", "Customers must receive accurate product information, especially about substances that cause allergies or intolerances. Special diets are always assessed separately."],
+            ["4", "Income and taxes", "Sales income may be taxable. Income, expenses and receipts must be recorded. The VAT-registration threshold is €20,000 per calendar year; the food VAT rate is 13.5% in 2026 when the activity is VAT-liable."],
+          ]).map((rule) => <article key={rule[0]}><span>{rule[0]}</span><div><h3>{rule[1]}</h3><p>{rule[2]}</p></div></article>)}
+        </div>
+        <div className="officialLinks"><strong>{fi ? "Viralliset ohjeet" : "Official guidance"}</strong><a href="https://www.jyvaskyla.fi/ymparisto/ymparistoterveys/elintarvikevalvonta/elintarviketoiminnan-aloittaminen" target="_blank" rel="noreferrer">Jyväskylän elintarvikevalvonta ↗</a><a href="https://www.ruokavirasto.fi/elintarvikkeet/elintarvikeala/elintarvikeyrityksen-perustaminen-ja-omavalvonta/ilmoita-elintarviketoiminnasta/" target="_blank" rel="noreferrer">Ruokavirasto ↗</a><a href="https://www.vero.fi/syventavat-vero-ohjeet/ohje-hakusivu/335806/arvonlis%C3%A4verovelvollisen-opas/" target="_blank" rel="noreferrer">Vero.fi ↗</a></div>
+        <p className="legalNote">{fi ? "Tämä yhteenveto ei ole oikeudellista tai verotuksellista neuvontaa. Viranomainen ratkaisee vaatimukset suunnitellun toiminnan perusteella." : "This summary is not legal or tax advice. The relevant authority determines the requirements based on the planned activity."}</p>
+      </section>
+
       <section className="contact" id="contact">
-        <div className="contactIntro"><p className="eyebrow">{t.orderKicker}</p><h2>{t.orderTitle}</h2><p>{t.orderText}</p><a className="whatsapp" href="https://wa.me/358408189294" target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>040 818 9294</strong><small>{t.contactNote}</small></a></div>
+        <div className="contactIntro"><p className="eyebrow">{t.orderKicker}</p><h2>{t.orderTitle}</h2><p>{t.orderText}</p><a className="whatsapp paused" href="https://wa.me/358408189294" target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>040 818 9294</strong><small>{t.contactNote}</small></a></div>
         <form className="contactForm" action="https://formsubmit.co/ehsanmohajer.fi@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="Uusi viesti – Olena Kakut"/>
+          <input type="hidden" name="_subject" value="Yleinen yhteydenotto – Olena Kakut"/>
           <input type="hidden" name="_next" value="https://olena-kaku.vercel.app/?sent=1#contact"/>
           <input type="text" name="_honey" className="honeypot" tabIndex={-1} autoComplete="off"/>
           <div className="field"><label htmlFor="name">{fi ? "Nimi" : "Name"}</label><input id="name" name="name" required autoComplete="name"/></div>
           <div className="field"><label htmlFor="email">{fi ? "Sähköposti" : "Email"}</label><input id="email" name="email" type="email" required autoComplete="email"/></div>
-          <div className="formRow"><div className="field"><label htmlFor="phone">{fi ? "Puhelin" : "Phone"}</label><input id="phone" name="phone" type="tel" autoComplete="tel"/></div><div className="field"><label htmlFor="date">{fi ? "Juhlapäivä" : "Celebration date"}</label><input id="date" name="date" type="date"/></div></div>
-          <div className="field"><label htmlFor="message">{fi ? "Kerro kakusta ja henkilömäärästä" : "Tell us about the cake and number of guests"}</label><textarea id="message" name="message" rows={5} required></textarea></div>
+          <div className="field"><label htmlFor="phone">{fi ? "Puhelin (valinnainen)" : "Phone (optional)"}</label><input id="phone" name="phone" type="tel" autoComplete="tel"/></div>
+          <div className="field"><label htmlFor="message">{fi ? "Viesti" : "Message"}</label><textarea id="message" name="message" rows={5} required></textarea></div>
           <button type="submit">{fi ? "Lähetä viesti" : "Send message"}<span>→</span></button>
           <small className="formNote">{fi ? "Viestisi lähetetään osoitteeseen ehsanmohajer.fi@gmail.com." : "Your message will be sent to ehsanmohajer.fi@gmail.com."}</small>
         </form>
