@@ -152,7 +152,7 @@ export default function Home() {
       </section>
 
       <section className="contact" id="contact">
-        <div className="contactIntro"><p className="eyebrow">{t.orderKicker}</p><h2>{t.orderTitle}</h2><p>{t.orderText}</p><a className="whatsapp paused" href="https://wa.me/358408189294" target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>040 818 9294</strong><small>{t.contactNote}</small></a></div>
+        <div className="contactIntro"><p className="eyebrow">{t.orderKicker}</p><h2>{t.orderTitle}</h2><p>{t.orderText}</p><a className="whatsapp paused" href="https://wa.me/358417251282" target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>041 725 1282</strong><small>{t.contactNote}</small></a></div>
         <form className="contactForm" action="https://formsubmit.co/ehsanmohajer.fi@gmail.com" method="POST">
           <input type="hidden" name="_subject" value="Yleinen yhteydenotto – Olena Kakut"/>
           <input type="hidden" name="_next" value="https://olena-kaku.vercel.app/?sent=1#contact"/>
