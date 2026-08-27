@@ -94,7 +94,7 @@ export default function Home() {
     orderTitle: fi ? "Haluatko jättää viestin?" : "Would you like to leave a message?",
     orderText: fi ? "Tilaukset eivät ole vielä avoinna. Lomakkeella voi lähettää yleisen kysymyksen tai yhteydenottopyynnön tulevaisuutta varten." : "Orders are not open yet. You may use the form for a general question or a future contact request.",
     message: fi ? "Yleinen yhteydenotto" : "General enquiry",
-    contactNote: fi ? "Ei vielä kakkujen tilauksia." : "Cake orders are not yet available.",
+    contactNote: fi ? "kysy tilauksesta." : "ask for orders.",
     footer: fi ? "Käsintehty rakkaudella" : "Handmade with love",
   };
 
