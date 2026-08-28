@@ -2,7 +2,14 @@
 
 import { type FormEvent, useEffect, useState } from "react";
 
-const gallery = Array.from({ length: 23 }, (_, i) => `/cakes/cake-${String(i + 1).padStart(2, "0")}.jpeg`);
+const gallery = Array.from({ length: 27 }, (_, i) => `/cakes/cake-${String(i + 1).padStart(2, "0")}.jpeg`);
+
+const galleryAlt: Record<string, { fi: string; en: string }> = {
+  "/cakes/cake-24.jpeg": { fi: "Kukkakoristeltu syntymäpäiväkakku", en: "Floral birthday cake" },
+  "/cakes/cake-25.jpeg": { fi: "Kukkakoristeltu syntymäpäiväkakku", en: "Floral birthday cake" },
+  "/cakes/cake-26.jpeg": { fi: "Kukkakoristeltu syntymäpäiväkakku", en: "Floral birthday cake" },
+  "/cakes/cake-27.jpeg": { fi: "Minecraft-aiheinen lasten kakku", en: "Minecraft-themed kids' cake" },
+};
 
 export default function Home() {
   const [lang, setLang] = useState<"fi" | "en">("fi");
@@ -124,7 +131,7 @@ export default function Home() {
 
       <section className="portfolio" id="cakes">
         <div className="portfolioHead"><div><p className="eyebrow">{t.workKicker}</p><h2>{t.workTitle}</h2></div><p>{t.workText}</p></div>
-        <div className="gallery">{gallery.map((src, i) => <figure key={src} className={`g${(i % 7) + 1}`}><img src={src} alt={fi ? `Olenan valmistama koristekakku ${i + 1}` : `Decorated cake handmade by Olena ${i + 1}`} loading={i > 5 ? "lazy" : "eager"}/></figure>)}</div>
+        <div className="gallery">{gallery.map((src, i) => <figure key={src} className={`g${(i % 7) + 1}`}><img src={src} alt={galleryAlt[src] ? (fi ? galleryAlt[src].fi : galleryAlt[src].en) : (fi ? `Olenan valmistama koristekakku ${i + 1}` : `Decorated cake handmade by Olena ${i + 1}`)} loading={i > 5 ? "lazy" : "eager"}/></figure>)}</div>
       </section>
 
       <section className="about" id="about">
