@@ -2,13 +2,16 @@
 
 import { type FormEvent, useEffect, useState } from "react";
 
-const gallery = Array.from({ length: 27 }, (_, i) => `/cakes/cake-${String(i + 1).padStart(2, "0")}.jpeg`);
+const gallery = Array.from({ length: 30 }, (_, i) => `/cakes/cake-${String(i + 1).padStart(2, "0")}.jpeg`);
 
 const galleryAlt: Record<string, { fi: string; en: string }> = {
   "/cakes/cake-24.jpeg": { fi: "Kukkakoristeltu syntymäpäiväkakku", en: "Floral birthday cake" },
   "/cakes/cake-25.jpeg": { fi: "Kukkakoristeltu syntymäpäiväkakku", en: "Floral birthday cake" },
   "/cakes/cake-26.jpeg": { fi: "Kukkakoristeltu syntymäpäiväkakku", en: "Floral birthday cake" },
   "/cakes/cake-27.jpeg": { fi: "Minecraft-aiheinen lasten kakku", en: "Minecraft-themed kids' cake" },
+  "/cakes/cake-28.jpeg": { fi: "Tiramisukakku yrityksen vuosipäivää varten, kaakaopinta ja fondant-logo", en: "Tiramisu cake for a company anniversary, cocoa top and fondant logo" },
+  "/cakes/cake-29.jpeg": { fi: "Rahasäkki-kakku, suklaafondantia ja kultaisia koristeita", en: "Money bag cake with chocolate fondant and gold decorations" },
+  "/cakes/cake-30.jpeg": { fi: "Rahasäkki-kakku lähikuvassa, suklaakolikoita ja kultahelmiä", en: "Close-up of the money bag cake with chocolate coins and gold pearls" },
 };
 
 export default function Home() {
